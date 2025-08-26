@@ -2,6 +2,7 @@ import { fetchNotes } from '@/lib/api';
 import NotesClient from './Notes.client';
 import { Tag } from '@/types/tag';
 import { tags } from '../@sidebar/default';
+import { Metadata } from 'next';
 
 interface SlugProps {
     params: Promise<{ slug?: string[] }>;
@@ -31,7 +32,7 @@ export default async function NotesPage({ params }: SlugProps) {
 }
 
 export const generateMetadata = async ({ params }: SlugProps
-) => {
+): Promise<Metadata> => {
     const { slug } = await params;
     const rawTag = slug?.[0];
     const tag = rawTag === 'all' || !tags.includes(rawTag as Tag) ? undefined : (rawTag as Tag);

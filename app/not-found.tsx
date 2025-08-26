@@ -1,4 +1,5 @@
 import css from '@/app/page.module.css'
+import { Metadata } from 'next';
 
 const NotFound = () => {
     return (
@@ -11,7 +12,7 @@ const NotFound = () => {
 
 export default NotFound;
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Not-found',
     description: 'This page does not exist',
     openGraph: {
