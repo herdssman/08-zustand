@@ -30,14 +30,19 @@ export const generateMetadata = async ({ params }: PageProps
 ): Promise<Metadata> => {
 	const { id } = await params;
 
+
 const note = await fetchNoteById(id);
+
+const description = note.content.length > 30 
+  ? note.content.slice(0, 30) + '…' 
+  : note.content;
 	
 	return {
 		title: note.title,
-		description: note.content.slice(0, 30),
+		description: description,
 		openGraph: {
 			title: note.title,
-			description: note.content.slice(0, 30),
+			description: description,
 			url: `/notes/${id}`,
 			siteName: 'NoteHub',
 			images: [{
