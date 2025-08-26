@@ -29,13 +29,15 @@ export default async function NoteDetails({ params }: PageProps) {
 export const generateMetadata = async ({ params }: PageProps
 ): Promise<Metadata> => {
 	const { id } = await params;
+
+const note = await fetchNoteById(id);
 	
 	return {
-		title: `Note: ${id}`,
-		description: `A note with id: ${id}`,
+		title: note.title,
+		description: note.content.slice(0, 30),
 		openGraph: {
-			title: `Note: ${id}`,
-			description: `A note with id: ${id}`,
+			title: note.title,
+			description: note.content.slice(0, 30),
 			url: `/notes/${id}`,
 			siteName: 'NoteHub',
 			images: [{
