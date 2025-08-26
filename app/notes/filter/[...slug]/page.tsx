@@ -36,14 +36,20 @@ export const generateMetadata = async ({ params }: SlugProps
     const { slug } = await params;
     const rawTag = slug?.[0];
     const tag = rawTag === 'all' || !tags.includes(rawTag as Tag) ? undefined : (rawTag as Tag);
+
+    const title = !tag ? 'All notes' : `${tag} notes`;
+
+    const description = !tag ? 'Take a look at all notes' : `Take a look at ${tag.toLowerCase()} notes`;
+
+    const url = !tag ? `/notes/filter/All` : `/notes/filter/${tag.toLowerCase()}`
     
     return {
-        title: `${tag} notes`,
-        description: `All notes with ${tag} tag`,
+        title,
+        description,
         openGraph: {
-            title: `${tag} notes`,
-            description: `All notes with ${tag} tag`,
-            url: `/notes/filter/${tag}`,
+            title,
+            description,
+            url,
             siteName: 'NoteHub',
             images: [{
                 url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
